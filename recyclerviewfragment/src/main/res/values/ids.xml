@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="recyclerView" type="id" />
+    <item name="loadingView" type="id" />
+    <item name="loadingMoreView" type="id" />
+    <item name="noDataView" type="id" />
+    <item name="errorView" type="id" />
+    <item name="tryAgainButton" type="id" />
+    <item name="swipeRefreshLayout" type="id" />
+</resources>

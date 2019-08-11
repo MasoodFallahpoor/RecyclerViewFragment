@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">RecyclerViewFragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_data">There is no data</string>
+    <string name="error_occurred">An error occurred</string>
+    <string name="try_again">Try again</string>
+</resources>
