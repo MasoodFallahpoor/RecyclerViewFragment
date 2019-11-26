@@ -7,15 +7,15 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import ir.fallahpoor.recyclerviewfragment.viewstate.DataErrorState;
-import ir.fallahpoor.recyclerviewfragment.viewstate.DataLoadedState;
-import ir.fallahpoor.recyclerviewfragment.viewstate.MoreDataErrorState;
-import ir.fallahpoor.recyclerviewfragment.viewstate.MoreDataLoadedState;
-import ir.fallahpoor.recyclerviewfragment.viewstate.ViewState;
+import ir.fallahpoor.recyclerviewfragment.state.DataErrorState;
+import ir.fallahpoor.recyclerviewfragment.state.DataLoadedState;
+import ir.fallahpoor.recyclerviewfragment.state.MoreDataErrorState;
+import ir.fallahpoor.recyclerviewfragment.state.MoreDataLoadedState;
+import ir.fallahpoor.recyclerviewfragment.state.State;
 
 class DataProvider<T> {
 
-    private MutableLiveData<ViewState> liveData = new MutableLiveData<>();
+    private MutableLiveData<State> stateLiveData = new MutableLiveData<>();
     private RecyclerViewDataProvider<T> dataProvider;
 
     DataProvider(@NonNull RecyclerViewDataProvider<T> dataProvider) {
@@ -26,9 +26,9 @@ class DataProvider<T> {
         AsyncTask.execute(() -> {
             List<T> data = dataProvider.getData();
             if (data == null) {
-                liveData.postValue(new DataErrorState());
+                stateLiveData.postValue(new DataErrorState());
             } else {
-                liveData.postValue(new DataLoadedState<>(data));
+                stateLiveData.postValue(new DataLoadedState<>(data));
             }
         });
     }
@@ -37,15 +37,15 @@ class DataProvider<T> {
         AsyncTask.execute(() -> {
             List<T> data = dataProvider.getMoreData();
             if (data == null) {
-                liveData.postValue(new MoreDataErrorState());
+                stateLiveData.postValue(new MoreDataErrorState());
             } else {
-                liveData.postValue(new MoreDataLoadedState<>(data));
+                stateLiveData.postValue(new MoreDataLoadedState<>(data));
             }
         });
     }
 
-    LiveData<ViewState> getDataLiveData() {
-        return liveData;
+    LiveData<State> getStateLiveData() {
+        return stateLiveData;
     }
 
 }

@@ -1,12 +1,12 @@
-package ir.fallahpoor.recyclerviewfragment.viewstate;
+package ir.fallahpoor.recyclerviewfragment.state;
 
 import java.util.List;
 
-public class DataLoadedState<T> implements ViewState {
+public class MoreDataLoadedState<T> implements State {
 
     private List<T> data;
 
-    public DataLoadedState(List<T> data) {
+    public MoreDataLoadedState(List<T> data) {
         this.data = data;
     }
 

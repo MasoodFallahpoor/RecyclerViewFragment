@@ -15,10 +15,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import ir.fallahpoor.recyclerviewfragment.viewstate.DataErrorState;
-import ir.fallahpoor.recyclerviewfragment.viewstate.DataLoadedState;
-import ir.fallahpoor.recyclerviewfragment.viewstate.MoreDataErrorState;
-import ir.fallahpoor.recyclerviewfragment.viewstate.MoreDataLoadedState;
+import ir.fallahpoor.recyclerviewfragment.state.DataErrorState;
+import ir.fallahpoor.recyclerviewfragment.state.DataLoadedState;
+import ir.fallahpoor.recyclerviewfragment.state.MoreDataErrorState;
+import ir.fallahpoor.recyclerviewfragment.state.MoreDataLoadedState;
 
 // TODO handle the click event of 'tryAgainButton'.
 // TODO handle screen rotation.
