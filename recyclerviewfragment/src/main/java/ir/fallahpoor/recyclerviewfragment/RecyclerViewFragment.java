@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -42,14 +41,14 @@ public abstract class RecyclerViewFragment<T> extends Fragment {
     private View errorView;
 
     private RecyclerViewAdapter<T, BaseViewHolder<T>> adapter;
-    private RecyclerViewViewModel<T> viewModel;
+    private DataProvider<T> dataProvider;
     private MutableLiveData<State> stateLiveData = new MutableLiveData<>();
     private EndlessScrollListener endlessScrollListener = new EndlessScrollListener() {
         @Override
         public void onLoadMore() {
             setState(State.LOADING_MORE);
             setVisibilityOfLoadingMoreView(View.VISIBLE);
-            viewModel.getMoreData();
+            dataProvider.getMoreData();
         }
     };
 
@@ -104,7 +103,7 @@ public abstract class RecyclerViewFragment<T> extends Fragment {
                 setState(State.LOADING);
                 setVisibilityOfNoDataView(View.GONE);
                 setVisibilityOfErrorView(View.GONE);
-                viewModel.getData();
+                dataProvider.getData();
             });
         }
 
@@ -130,20 +129,18 @@ public abstract class RecyclerViewFragment<T> extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setupViewModel();
-        subscribeViewModel();
+        setupDataProvider();
+        observeState();
         loadData();
     }
 
-    private void setupViewModel() {
-        RecyclerViewDataProvider<T> recyclerViewDataProvider = getDataProvider();
-        throwExceptionIfNull(recyclerViewDataProvider, "getDataProvider");
-        ViewModelFactory<T> viewModelFactory = new ViewModelFactory<>(new DataProvider<>(recyclerViewDataProvider));
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(RecyclerViewViewModel.class);
+    private void setupDataProvider() {
+        dataProvider = new DataProvider<>(getDataProvider());
+        throwExceptionIfNull(dataProvider, "getDataProvider");
     }
 
-    private void subscribeViewModel() {
-        viewModel.getViewStateLiveData().observe(getViewLifecycleOwner(), viewState -> {
+    private void observeState() {
+        dataProvider.getStateLiveData().observe(getViewLifecycleOwner(), viewState -> {
             if (viewState instanceof DataLoadedState) {
                 DataLoadedState<T> dataLoadedState = (DataLoadedState<T>) viewState;
                 handleDataLoadedState(dataLoadedState);
@@ -198,7 +195,7 @@ public abstract class RecyclerViewFragment<T> extends Fragment {
     private void loadData() {
         setState(State.LOADING);
         showLoading();
-        viewModel.getData();
+        dataProvider.getData();
     }
 
     private void showLoading() {
