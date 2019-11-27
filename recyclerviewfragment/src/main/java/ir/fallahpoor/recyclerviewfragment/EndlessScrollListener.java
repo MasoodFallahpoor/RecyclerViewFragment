@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public abstract class EndlessScrollListener extends RecyclerView.OnScrollListener {
+abstract class EndlessScrollListener extends RecyclerView.OnScrollListener {
 
     private static final int THRESHOLD_ROWS = 8;
 
