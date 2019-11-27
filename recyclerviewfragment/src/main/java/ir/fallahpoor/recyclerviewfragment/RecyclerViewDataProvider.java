@@ -4,6 +4,7 @@ import java.util.List;
 
 import androidx.annotation.WorkerThread;
 
+@WorkerThread
 public interface RecyclerViewDataProvider<T> {
 
     /**
@@ -26,7 +27,6 @@ public interface RecyclerViewDataProvider<T> {
      *
      * @return List of items or {@code null}.
      */
-    @WorkerThread
     List<T> getData();
 
     /**
@@ -47,7 +47,6 @@ public interface RecyclerViewDataProvider<T> {
      *
      * @return List of items or {@code null}.
      */
-    @WorkerThread
     List<T> getMoreData();
 
 }
