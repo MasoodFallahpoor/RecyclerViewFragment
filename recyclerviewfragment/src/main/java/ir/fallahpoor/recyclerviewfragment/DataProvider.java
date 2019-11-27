@@ -25,22 +25,14 @@ class DataProvider<T> {
     void getData() {
         AsyncTask.execute(() -> {
             List<T> data = dataProvider.getData();
-            if (data == null) {
-                stateLiveData.postValue(new DataErrorState());
-            } else {
-                stateLiveData.postValue(new DataLoadedState<>(data));
-            }
+            stateLiveData.postValue(data == null ? new DataErrorState() : new DataLoadedState<>(data));
         });
     }
 
     void getMoreData() {
         AsyncTask.execute(() -> {
             List<T> data = dataProvider.getMoreData();
-            if (data == null) {
-                stateLiveData.postValue(new MoreDataErrorState());
-            } else {
-                stateLiveData.postValue(new MoreDataLoadedState<>(data));
-            }
+            stateLiveData.postValue(data == null ? new MoreDataErrorState() : new MoreDataLoadedState<>(data));
         });
     }
 
