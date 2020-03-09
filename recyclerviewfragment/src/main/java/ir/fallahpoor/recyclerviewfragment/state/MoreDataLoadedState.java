@@ -2,7 +2,7 @@ package ir.fallahpoor.recyclerviewfragment.state;
 
 import java.util.List;
 
-public class MoreDataLoadedState<T> implements State {
+public class MoreDataLoadedState<T> implements State<T> {
 
     private List<T> data;
 

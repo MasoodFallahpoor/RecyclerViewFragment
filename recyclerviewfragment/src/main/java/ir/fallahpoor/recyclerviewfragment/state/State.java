@@ -1,4 +1,4 @@
 package ir.fallahpoor.recyclerviewfragment.state;
 
-public interface State {
+public interface State<T> {
 }

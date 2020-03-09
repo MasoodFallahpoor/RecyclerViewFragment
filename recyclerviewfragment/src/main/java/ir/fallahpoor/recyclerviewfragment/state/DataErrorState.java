@@ -1,4 +1,4 @@
 package ir.fallahpoor.recyclerviewfragment.state;
 
-public class DataErrorState implements State {
+public class DataErrorState<T> implements State<T> {
 }

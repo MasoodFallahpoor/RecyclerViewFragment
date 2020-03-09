@@ -15,7 +15,7 @@ import ir.fallahpoor.recyclerviewfragment.state.State;
 
 class DataProvider<T> {
 
-    private MutableLiveData<State> stateLiveData = new MutableLiveData<>();
+    private MutableLiveData<State<T>> stateLiveData = new MutableLiveData<>();
     private RecyclerViewDataProvider<T> dataProvider;
 
     DataProvider(@NonNull RecyclerViewDataProvider<T> dataProvider) {
@@ -25,18 +25,18 @@ class DataProvider<T> {
     void getData() {
         AsyncTask.execute(() -> {
             List<T> data = dataProvider.getData();
-            stateLiveData.postValue(data == null ? new DataErrorState() : new DataLoadedState<>(data));
+            stateLiveData.postValue(data == null ? new DataErrorState<>() : new DataLoadedState<>(data));
         });
     }
 
     void getMoreData() {
         AsyncTask.execute(() -> {
             List<T> data = dataProvider.getMoreData();
-            stateLiveData.postValue(data == null ? new MoreDataErrorState() : new MoreDataLoadedState<>(data));
+            stateLiveData.postValue(data == null ? new MoreDataErrorState<>() : new MoreDataLoadedState<>(data));
         });
     }
 
-    LiveData<State> getStateLiveData() {
+    LiveData<State<T>> getStateLiveData() {
         return stateLiveData;
     }
 
