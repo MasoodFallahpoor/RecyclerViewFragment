@@ -142,13 +142,11 @@ public abstract class RecyclerViewFragment<T> extends Fragment {
     private void observeState() {
         dataProvider.getStateLiveData().observe(getViewLifecycleOwner(), viewState -> {
             if (viewState instanceof DataLoadedState) {
-                DataLoadedState<T> dataLoadedState = (DataLoadedState<T>) viewState;
-                handleDataLoadedState(dataLoadedState);
+                handleDataLoadedState((DataLoadedState<T>) viewState);
             } else if (viewState instanceof DataErrorState) {
                 handleDataErrorState();
             } else if (viewState instanceof MoreDataLoadedState) {
-                MoreDataLoadedState<T> moreDataLoadedState = (MoreDataLoadedState<T>) viewState;
-                handleMoreDataLoadedState(moreDataLoadedState);
+                handleMoreDataLoadedState((MoreDataLoadedState<T>) viewState);
             } else if (viewState instanceof MoreDataErrorState) {
                 handleMoreDataErrorState();
             }
@@ -160,13 +158,12 @@ public abstract class RecyclerViewFragment<T> extends Fragment {
         if (dataLoadedState.getData().isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             setVisibilityOfNoDataView(View.VISIBLE);
-            setVisibilityOfErrorView(View.GONE);
         } else {
             adapter.setItems(dataLoadedState.getData());
             recyclerView.setVisibility(View.VISIBLE);
             setVisibilityOfNoDataView(View.GONE);
-            setVisibilityOfErrorView(View.GONE);
         }
+        setVisibilityOfErrorView(View.GONE);
 
         setState(State.DATA_LOADED);
         hideLoading();

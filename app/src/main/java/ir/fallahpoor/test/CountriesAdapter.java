@@ -19,7 +19,7 @@ public class CountriesAdapter extends RecyclerViewAdapter<Country, BaseViewHolde
         return new CountryViewHolder(view);
     }
 
-    class CountryViewHolder extends BaseViewHolder<Country> {
+    static class CountryViewHolder extends BaseViewHolder<Country> {
 
         TextView countryNameTextView;
 

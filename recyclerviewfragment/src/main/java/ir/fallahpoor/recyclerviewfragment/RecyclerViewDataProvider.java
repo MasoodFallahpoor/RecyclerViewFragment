@@ -23,7 +23,7 @@ public interface RecyclerViewDataProvider<T> {
      * {@link ir.fallahpoor.recyclerviewfragment.RecyclerViewFragment.State#DATA_LOADED}</li>
      * </ul>
      * <p>
-     * NOTE: This method is run on a worker thread.
+     * NOTE: This method is run on a background thread.
      *
      * @return List of items or {@code null}.
      */
@@ -43,7 +43,7 @@ public interface RecyclerViewDataProvider<T> {
      * state will be {@link ir.fallahpoor.recyclerviewfragment.RecyclerViewFragment.State#MORE_DATA_LOADED}</li>
      * </ul>
      * <p>
-     * NOTE: This method is run on a worker thread.
+     * NOTE: This method is run on a background thread.
      *
      * @return List of items or {@code null}.
      */
