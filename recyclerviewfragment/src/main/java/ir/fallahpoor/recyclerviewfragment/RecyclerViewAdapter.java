@@ -2,15 +2,15 @@ package ir.fallahpoor.recyclerviewfragment;
 
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class RecyclerViewAdapter<T, VH extends BaseViewHolder<T>> extends RecyclerView.Adapter<VH> {
 
-    private List<T> items;
+    private final List<T> items;
     private ItemClickListener<T> listener;
 
     public RecyclerViewAdapter() {
@@ -31,7 +31,7 @@ public abstract class RecyclerViewAdapter<T, VH extends BaseViewHolder<T>> exten
     }
 
     void addItems(List<T> items) {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             return;
         }
         this.items.addAll(items);

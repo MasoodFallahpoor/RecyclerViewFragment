@@ -14,6 +14,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import ir.fallahpoor.recyclerviewfragment.state.DataErrorState;
 import ir.fallahpoor.recyclerviewfragment.state.DataLoadedState;
 import ir.fallahpoor.recyclerviewfragment.state.MoreDataErrorState;
@@ -42,8 +43,8 @@ public abstract class RecyclerViewFragment<T> extends Fragment {
 
     private RecyclerViewAdapter<T, BaseViewHolder<T>> adapter;
     private DataProvider<T> dataProvider;
-    private MutableLiveData<State> stateLiveData = new MutableLiveData<>();
-    private EndlessScrollListener endlessScrollListener = new EndlessScrollListener() {
+    private final MutableLiveData<State> stateLiveData = new MutableLiveData<>();
+    private final EndlessScrollListener endlessScrollListener = new EndlessScrollListener() {
         @Override
         public void onLoadMore() {
             setState(State.LOADING_MORE);
@@ -380,9 +381,9 @@ public abstract class RecyclerViewFragment<T> extends Fragment {
      * <li>It MUST (among possibly other Views) contain a RecyclerView named
      * 'recyclerView' and a View named 'loadingView'.</li>
      * <li>If {@link RecyclerViewFragment#isNoDataViewSupported()} returns {@code true} then
-     * contain a View named 'noDataView' in your layout.</li>
+     * have a View named 'noDataView' in your layout.</li>
      * <li>If {@link RecyclerViewFragment#isErrorViewSupported()} returns {@code true} then
-     * contain a View named 'errorView' in your layout.</li>
+     * have a View named 'errorView' in your layout.</li>
      * <li>When {@link RecyclerViewFragment#isSwipeToRefreshSupported()} is {@code true} then it
      * MUST contain a SwipeRefreshLayout named 'swipeRefreshLayout'.</li>
      * <li>When {@link RecyclerViewFragment#isLoadMoreSupported()} returns {@code true} then
